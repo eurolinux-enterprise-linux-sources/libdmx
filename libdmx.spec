@@ -1,11 +1,10 @@
 Summary: X.Org X11 DMX runtime library
 Name: libdmx
-Version: 1.1.0
-Release: 1%{?dist}
+Version: 1.1.2
+Release: 2%{?dist}
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Source0: ftp://ftp.x.org/pub/individual/lib/%{name}-%{version}.tar.bz2
 
@@ -57,6 +56,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/X11/extensions/dmxext.h
 
 %changelog
+* Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
+* Thu Mar 08 2012 Adam Jackson <ajax@redhat.com> 1.1.2-1
+- libdmx 1.1.2
+
+* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
+* Mon Feb 07 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
+* Mon Nov 08 2010 Adam Jackson <ajax@redhat.com> 1.1.1-1
+- libdmx 1.1.1
+
 * Wed Oct 07 2009 Adam Jackson <ajax@redhat.com> 1.1.0-1
 - libdmx 1.1.0
 

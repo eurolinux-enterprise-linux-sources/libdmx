@@ -1,14 +1,29 @@
+%global tarball libdmx
+#global gitdate 20130524
+%global gitversion 5074d9d64
+
 Summary: X.Org X11 DMX runtime library
 Name: libdmx
-Version: 1.1.2
-Release: 2%{?dist}
+Version: 1.1.3
+Release: 3%{?gitdate:.%{gitdate}git%{gitversion}}%{?dist}
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
 
-Source0: ftp://ftp.x.org/pub/individual/lib/%{name}-%{version}.tar.bz2
+%if 0%{?gitdate}
+Source0:    %{tarball}-%{gitdate}.tar.bz2
+Source1:    make-git-snapshot.sh
+Source2:    commitid
+%else
+Source0: http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
+%endif
+
+Requires: libX11 >= 1.5.99.902
 
 BuildRequires: pkgconfig(xext)
+BuildRequires: autoconf automake libtool
+BuildRequires: xorg-x11-util-macros
+BuildRequires: libX11-devel >= 1.5.99.902
 
 %description
 The X.Org X11 DMX (Distributed Multihead X) runtime library.
@@ -22,9 +37,10 @@ Requires: %{name} = %{version}-%{release}
 The X.Org X11 DMX (Distributed Multihead X) development files.
 
 %prep
-%setup -q
+%setup -q -n %{tarball}-%{?gitdate:%{gitdate}}%{!?gitdate:%{version}}
 
 %build
+autoreconf -v --install --force
 %configure --disable-static
 make %{?_smp_mflags}
 
@@ -44,7 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING ChangeLog
+%doc COPYING
 %{_libdir}/libdmx.so.1
 %{_libdir}/libdmx.so.1.0.0
 
@@ -56,6 +72,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/X11/extensions/dmxext.h
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.1.3-3
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.1.3-2
+- Mass rebuild 2013-12-27
+
+* Thu May 30 2013 Peter Hutterer <peter.hutterer@redhat.com> 1.1.3-1
+- libdmx 1.1.3
+
+* Mon May 27 2013 Peter Hutterer <peter.hutterer@redhat.com> - 1.1.2-5.20130524git5074d9d64
+- Require libX11 1.6RC2 for _XEatDataWords
+
+* Fri May 24 2013 Peter Hutterer <peter.hutterer@redhat.com> 1.1.2-4.20130524git5074d9d64
+- Update to git snapshot for CVEs listed below:
+- CVE-2013-1992
+
+* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 

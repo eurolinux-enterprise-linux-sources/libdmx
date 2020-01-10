@@ -5,7 +5,7 @@
 Summary: X.Org X11 DMX runtime library
 Name: libdmx
 Version: 1.1.3
-Release: 1%{?gitdate:.%{gitdate}git%{gitversion}}%{?dist}
+Release: 3%{?gitdate:.%{gitdate}git%{gitversion}}%{?dist}
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -72,6 +72,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/X11/extensions/dmxext.h
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.1.3-3
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.1.3-2
+- Mass rebuild 2013-12-27
+
 * Thu May 30 2013 Peter Hutterer <peter.hutterer@redhat.com> 1.1.3-1
 - libdmx 1.1.3
 
